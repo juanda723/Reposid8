@@ -1,11 +1,22 @@
-reposi.test_form:
+reposi:
   title: 'Repository'
-  route_name: reposi.test_form
+  route_name: reposi
   menu_name: tools
 
 reposi.author:
   title: 'Authors list'
   route_name: reposi.author
   menu_name: tools
-  parent: reposi.test_form
+  parent: reposi
 
+reposi.listus:
+  title: 'User list'
+  route_name: reposi.listus
+  menu_name: tools
+  parent: reposi
+
+reposi.listusactive:
+  title: 'User active list'
+  route_name: reposi.listusactive
+  menu_name: tools
+  parent: reposi.listus
