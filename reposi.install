@@ -1,5 +1,4 @@
 <?php
-
 function reposi_install() {
   $arol[] = array(100, t('Teacher'), NULL);
   $arol[] = array(101, t('Student'), NULL);
@@ -12,6 +11,7 @@ function reposi_install() {
       'academic_uid'  => $record[2],
     ))->execute();
   }
+
   $stat[] = array(1, 'Active', NULL);
   $stat[] = array(2, 'Inactive', NULL);
 
@@ -22,9 +22,10 @@ function reposi_install() {
       's_uid'     => $record[2],
     ))->execute();
   }
-}
 
+}
 function reposi_schema() {
+
     $schema['reposi_user'] = array(
       'description' => 'Repository user data',
       'fields' => array(
@@ -389,11 +390,6 @@ function reposi_schema() {
       ),
     'primary key' => array('aid'),);
 
-
-    //OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-    //________________________________REPOSI ACADEMIC_ROL______________________________________
-    //00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-
     $schema['reposi_academic'] = array(
       'description' => 'Academic rol list',
       'fields' => array(
@@ -417,13 +413,6 @@ function reposi_schema() {
           'description' => '',
         ),
       ),
-      //______________________________insert values_______________________________________
-      'values' => array(
-        'academic_id' => '100',
-        'academic_type' => 'Teacher',
-        'academic_uid' => '',
-      ),
-
     'primary key' => array('academic_id'),);
 
     $schema['reposi_state'] = array(
@@ -650,43 +639,10 @@ function reposi_schema() {
     'primary key' => array('pid'),);
 
     return ($schema);
-}
+
+	}
 
 /**
  * It store the possible academic rols for a user.
  */
-function reposi_academic_rol() {
 
-
-  $arol[] = array(100, t('Teacher'), NULL);
-  $arol[] = array(101, t('Student'), NULL);
-  $arol[] = array(102, t('Student and Teacher'), NULL);
-  $db = \Drupal::database(); 
-  foreach ($arol as $record) {
-    $db->insert('reposi_academic')
-       ->fields(array(
-      'academic_id'   => $record[0],
-      'academic_type' => $record[1],
-      'academic_uid'  => $record[2],
-    ))
-       ->execute();
-  }
- return;
-}
-
-/**
- * It store the possible states for a user.
- */
-function _reposi_state() {
-  $stat[] = array(1, 'Active', NULL);
-  $stat[] = array(2, 'Inactive', NULL);
-
-  foreach ($stat as $record) {
-    db_insert('reposi_state')->fields(array(
-      'state_id'  => $record[0],
-      's_type'    => $record[1],
-      's_uid'     => $record[2],
-    ))->execute();
-  }
- return;
-}
