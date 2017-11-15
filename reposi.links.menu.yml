@@ -1,0 +1,11 @@
+reposi.test_form:
+  title: 'Repository'
+  route_name: reposi.test_form
+  menu_name: tools
+
+reposi.author:
+  title: 'Authors list'
+  route_name: reposi.author
+  menu_name: tools
+  parent: reposi.test_form
+
