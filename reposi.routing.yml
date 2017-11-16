@@ -22,14 +22,61 @@ reposi.author:
   requirements:
     _permission: 'access content'
 
-reposi.Reposi_info_publication:
-  path: '/reposi/article/{node}/free'
+
+##################3andrea##########################################
+
+
+reposi.add_article:
+  path: 'reposi/article'
   defaults:
-    _controller: '\Drupal\reposi\Controller\Reposi_info_publication::reposi_info_article_free'
-    _title: 'Article information'
+    _form: '\Drupal\reposi\Form\Reposi_article_form'
+    _title: 'Authors list'
+  requirements:
+    _permission: 'access content'
+
+reposi.admuser:
+  path: /reposi/admuser
+  defaults:
+    _form: 'Drupal\reposi\Form\Reposi_user_admin_form'
+    _title: 'Repository'
   requirements:
     _permission: 'administer content'
 
+
+reposi.author_aid:
+  path: 'reposi/author/{node}'
+  defaults:
+    _controller: '\Drupal\reposi\Controller\ReposiController::reposi_info_author'
+    _title: 'Authors list'
+  requirements:
+    _permission: 'access content'
+
+#reposi.listus:
+#  path: 'reposi/listus'
+#  defaults:
+#    _controller: '\Drupal\reposi\Controller\ReposiController::reposi_user_list'
+#    _title: 'Authors list'
+#  requirements:
+#    _permission: 'administer content'
+
+#reposi.listusactive:
+#  path: 'reposi/listus/active'
+#  defaults:
+#    _controller: '\Drupal\reposi\Controller\ReposiController::reposi_user_act_list'
+#    _title: 'User active list'
+#  requirements:
+#    _permission: 'administer content'
+
+#reposi.admuser_info:
+#  path: 'reposi/adm_user/{node}'
+#  defaults:
+#    _form: 'Drupal\reposi\Form\Reposi_info_user'
+#    _title: 'User information'
+#  requirements:
+#    _permission: 'administer content'
+
+
+####################Juan###########################################
 
 reposi.reposi_format_ris:
   path: '/reposi/ris/{node}'
