@@ -146,11 +146,11 @@ public function reposi_info_article_free(){
       if (!empty($each_aut['a_second_name'])) {
         $s_name = Reposi_info_publication::reposi_string($each_aut['a_second_name']);
         $authors_art = $authors_art . \Drupal::l($each_aut['a_first_lastname'] . ' ' . $each_aut['a_second_lastname'] .
-                      ' ' . $f_name[0] . '. ' . $s_name[0] . '.',Url::fromRoute('reposi.reposi_format_ris',['node'=>$aut_art->ap_author_id])) . '.';
+                      ' ' . $f_name[0] . '. ' . $s_name[0] . '.',Url::fromRoute('reposi.author_aid',['node'=>$aut_art->ap_author_id])) . '.';
 /////////////////////////Duireccion CAmbiar Falta /reposi/author/{node}
       } else {
         $authors_art = $authors_art . \Drupal::l($each_aut['a_first_lastname'] . ' ' . $each_aut['a_second_lastname'] .
-                      ' ' . $f_name[0] . '. ',Url::fromRoute('reposi.reposi_format_ris',['node'=>$aut_art->ap_author_id])) . '.';
+                      ' ' . $f_name[0] . '. ',Url::fromRoute('reposi.author_aid',['node'=>$aut_art->ap_author_id])) . '.';
       }
     }
   }
@@ -279,10 +279,10 @@ function reposi_info_book_free(){
       if (!empty($each_aut['a_second_name'])) {
         $s_name = Reposi_info_publication::reposi_string($each_aut['a_second_name']);
         $authors_book = $authors_book . \Drupal::l($each_aut['a_first_lastname'] . ' ' . $each_aut['a_second_lastname'] .
-                      ' ' . $f_name[0] . '. ' . $s_name[0] . '.',Url::fromRoute('reposi.reposi_format_ris',['node'=>$aut_art->ap_author_id])) . ', ';
+                      ' ' . $f_name[0] . '. ' . $s_name[0] . '.',Url::fromRoute('reposi.author_aid',['node'=>$aut_art->ap_author_id])) . ', ';
       } else {
         $authors_book = $authors_book . \Drupal::l($each_aut['a_first_lastname'] . ' ' . $each_aut['a_second_lastname'] .
-                      ' ' . $f_name[0] . '.', Url::fromRoute('reposi.reposi_format_ris',['node'=>$aut_art->ap_author_id] )) . ', ';
+                      ' ' . $f_name[0] . '.', Url::fromRoute('reposi.author_aid',['node'=>$aut_art->ap_author_id] )) . ', ';
       }
     } else {
       $search_aut = db_select('reposi_author', 'a');

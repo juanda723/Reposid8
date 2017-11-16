@@ -1,7 +1,7 @@
-reposi.test_form:
+reposi:
   path: /reposi
   defaults:
-    _form: 'Drupal\reposi\Form\TestFormula'
+    _form: 'Drupal\reposi\Form\Reposi_list_publication_free'
     _title: 'Repository'
   requirements:
     _permission: 'administer content'
