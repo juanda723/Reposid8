@@ -6,21 +6,11 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormState;
 use Drupal\Core\Form\FormStateInterface;
 
-/**
- * Implements an example form.
- */
-class TestFormula extends FormBase {
+class Reposi_list_publication_free extends FormBase {
 
-  /**
-   * {@inheritdoc}
-   */
   public function getFormId() {
     return 'ListPublicationFree_form';
   }
-
-  /**
-   * {@inheritdoc}
-   */
 
   public function buildForm(array $form, FormStateInterface $form_state) {
 
@@ -58,14 +48,11 @@ class TestFormula extends FormBase {
 
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function validateForm(array &$form, FormStateInterface $form_state) 
-  {
-   $publications="";
-   global $base_url;
-   $search_publi = db_select('reposi_publication', 'p')->extend('Drupal\Core\Database\Query\PagerSelectExtender');
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+   
+  $publications="";
+  global $base_url;
+  $search_publi = db_select('reposi_publication', 'p')->extend('Drupal\Core\Database\Query\PagerSelectExtender');
    $search_publi->fields('p')
                ->condition('p.p_check', 1, '=')
                ->orderBy('p.p_year', 'DESC')
@@ -96,14 +83,24 @@ class TestFormula extends FormBase {
         if (!empty($each_aut['a_second_name'])) 
 	  {
           $s_name = reposi_string($each_aut['a_second_name']);
-          $list_aut_abc = $list_aut_abc . l($each_aut['a_first_lastname'] . ' ' .
+          $url = Url::fromRoute('reposi.author', ['node' => $art_aut->ap_author_id]);
+          $link= \Drupal::l(t($each_aut['a_first_lastname'] . ' ' .
+                        $each_aut['a_second_lastname'] . ' ' . $f_name[0] . '. ' . $s_name[0] . '.'), 
+                        $url);
+          $list_aut_abc = $list_aut_abc . $link . ', ';
+          /*$list_aut_abc = $list_aut_abc . l($each_aut['a_first_lastname'] . ' ' .
                         $each_aut['a_second_lastname'] . ' ' . $f_name[0] . '. ' . $s_name[0] . '.',
-                        $base_url . '/reposi/author/' . $art_aut->ap_author_id) . ', ';
+                        $base_url . '/reposi/author/' . $art_aut->ap_author_id) . ', ';*/
           } else 
       	  {
-          $list_aut_abc = $list_aut_abc . l($each_aut['a_first_lastname'] . ' ' .
+          $url = Url::fromRoute('reposi.author', ['node' => $art_aut->ap_author_id]);
+          $link= \Drupal::l(t($each_aut['a_first_lastname'] . ' ' .
+                        $each_aut['a_second_lastname'] . ' ' . $f_name[0] . '.'), 
+                        $url);
+          $list_aut_abc = $list_aut_abc . $link . ', ';
+          /*$list_aut_abc = $list_aut_abc . l($each_aut['a_first_lastname'] . ' ' .
                         $each_aut['a_second_lastname'] . ' ' . $f_name[0] . '.',
-                        $base_url . '/reposi/author/' . $art_aut->ap_author_id) . ', ';
+                        $base_url . '/reposi/author/' . $art_aut->ap_author_id) . ', ';*/
           }
        }
 //****
@@ -213,12 +210,8 @@ class TestFormula extends FormBase {
 
 //  return $publications;
 
-return array(
-      '#type' => 'markup',
-      '#markup' => t('PUBLICACIONES: '.$publications),
-    );
-
   }
+
   /**
    * {@inheritdoc}
    */
@@ -236,7 +229,7 @@ return array(
   //$form_state['redirect'] = $base_url . '/reposi/results/' . $searching;
   //CAMBIAAAAA LO SIGUIENTE---->
   if (empty($searching)){
-    $form_state->setRedirect('reposi.test_form');
+    $form_state->setRedirect('reposi');
     drupal_set_message(t('No records'),'error');
   }
   else
