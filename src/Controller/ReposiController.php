@@ -40,7 +40,7 @@ class ReposiController {
   foreach ($search_char as $characters) {
     $title_bit = explode(' ', $characters->p_title);
     foreach ($title_bit as $search_word) {
-      for ($i=1; $i <= $num_words; $i++) { 
+      for ($i=1; $i <= $num_words; $i++) {
         $a = $i-1;
         $new_search_word = strtolower($search_word);
         $new_each_word = strtolower($each_word[$a]);
@@ -52,7 +52,7 @@ class ReposiController {
       }
     }
   }
-  $new_pids = array_unique($pids);  
+  $new_pids = array_unique($pids);
   $publications = '';
   foreach ($new_pids as $ids) {
     $search_publi = db_select('reposi_publication', 'p')->extend('PagerDefault');
@@ -66,7 +66,7 @@ class ReposiController {
       $pub_title = $list_p->p_title;
       $pub_year = $list_p->p_year;
       $tsid = $list_p->p_tsid;
-      $abid = $list_p->p_abid;  
+      $abid = $list_p->p_abid;
       if (isset($abid)) {
         $search_p_a = db_select('reposi_publication_author', 'pa');
         $search_p_a->fields('pa', array('ap_author_id', 'ap_abid'))
@@ -92,17 +92,17 @@ class ReposiController {
         if ($pub_type == 'Article') {
           $publications = $publications .'<p>'. $list_aut_abc.'(' . $pub_year . ') ' .'<b>'. l($pub_title,
                           $base_url . '/reposi/article/' . $abid . '/free') . '</b>' . '.' . '<br>' .
-                          '<small>' . t('Export formats: ') . 
+                          '<small>' . t('Export formats: ') .
                           l(t('RIS'), $base_url . '/reposi/ris/' . $list_p->pid) . '</small>' . '</p>';
         } elseif ($list_p->p_type == 'Book'){
-          $publications .= '<p>'. $list_aut_abc.'(' . $pub_year . ') ' .'<b>'. l($pub_title, 
+          $publications .= '<p>'. $list_aut_abc.'(' . $pub_year . ') ' .'<b>'. l($pub_title,
                           $base_url . '/reposi/book/' . $abid . '/free') . '</b>' . '.' . '<br>' .
-                          '<small>' . t('Export formats: ') . 
+                          '<small>' . t('Export formats: ') .
                           l(t('RIS'), $base_url . '/reposi/ris/' . $list_p->pid) . '</small>' . '</p>';
         } else {
-          $publications .= '<p>'. $list_aut_abc.'(' . $pub_year . ') ' .'<b>'. 
+          $publications .= '<p>'. $list_aut_abc.'(' . $pub_year . ') ' .'<b>'.
                           l($pub_title, $base_url . '/reposi/chap_book/' . $abid . '/free') . '</b>' .
-                          '.' . '<br>' . '<small>' . t('Export formats: ') . 
+                          '.' . '<br>' . '<small>' . t('Export formats: ') .
                           l(t('RIS'), $base_url . '/reposi/ris/' . $list_p->pid) . '</small>' . '</p>';
         }
       } elseif (isset($tsid)) {
@@ -128,14 +128,14 @@ class ReposiController {
           }
         }
         if ($pub_type == 'Thesis') {
-          $publications .= '<p>'. $list_aut_ts. '(' . $pub_year . ') ' .'<b>'. l($pub_title, 
+          $publications .= '<p>'. $list_aut_ts. '(' . $pub_year . ') ' .'<b>'. l($pub_title,
                           $base_url . '/reposi/thesis/' . $tsid . '/free') . '</b>' . '.' . '<br>' .
-                          '<small>' . t('Export formats: ') . 
+                          '<small>' . t('Export formats: ') .
                           l(t('RIS'), $base_url . '/reposi/ris/' . $list_p->pid) . '</small>' . '</p>';
         } else {
-          $publications .= '<p>'. $list_aut_ts. '(' . $pub_year . ') ' .'<b>'. l($pub_title, 
+          $publications .= '<p>'. $list_aut_ts. '(' . $pub_year . ') ' .'<b>'. l($pub_title,
                           $base_url . '/reposi/software/' . $tsid . '/free') . '</b>' . '.' . '<br>' .
-                          '<small>' . t('Export formats: ') . 
+                          '<small>' . t('Export formats: ') .
                           l(t('RIS'), $base_url . '/reposi/ris/' . $list_p->pid) . '</small>' . '</p>';
         }
       } else {
@@ -157,22 +157,22 @@ class ReposiController {
                           $each_aut['a_second_lastname'] . ' ' . $f_name[0] . '. ' . $s_name[0] . '.',
                           $base_url . '/reposi/author/' . $con_aut->ap_author_id) . ', ';
           } else {
-            $list_aut_cp = $list_aut_cp . l($each_aut['a_first_lastname'] . ' ' . $each_aut['a_second_lastname'] . 
+            $list_aut_cp = $list_aut_cp . l($each_aut['a_first_lastname'] . ' ' . $each_aut['a_second_lastname'] .
                           ' ' . $f_name[0] . '.', $base_url . '/reposi/author/' . $con_aut->ap_author_id) . ', ';
           }
         }
         if ($pub_type == 'Conference') {
-          $publications .= '<p>'.$list_aut_cp . '(' . $pub_year . ') ' .'<b>'. 
-                          l($pub_title, $base_url . '/reposi/conference/' . $cpid . '/free') . 
-                          '</b>' . '.' . '<br>' . '<small>' . t('Export formats: ') . 
+          $publications .= '<p>'.$list_aut_cp . '(' . $pub_year . ') ' .'<b>'.
+                          l($pub_title, $base_url . '/reposi/conference/' . $cpid . '/free') .
+                          '</b>' . '.' . '<br>' . '<small>' . t('Export formats: ') .
                           l(t('RIS'), $base_url . '/reposi/ris/' . $list_p->pid) . '</small>' . '</p>';
         } else {
-          $publications .= '<p>'.$list_aut_cp . '(' . $pub_year . ') ' .'<b>'. 
+          $publications .= '<p>'.$list_aut_cp . '(' . $pub_year . ') ' .'<b>'.
                     l($pub_title, $base_url . '/reposi/patent/' . $cpid . '/free') . '</b>' . '.' . '<br>' .
-                    '<small>' . t('Export formats: ') . 
+                    '<small>' . t('Export formats: ') .
                     l(t('RIS'), $base_url . '/reposi/ris/' . $list_p->pid) . '</small>' . '</p>';
         }
-      } 
+      }
     }
   }
   if (empty($publications)) {
@@ -180,7 +180,7 @@ class ReposiController {
   }
 
 
- 
+
  return array(
       '#type' => 'markup',
       '#markup' => t($publications)
@@ -202,7 +202,7 @@ class ReposiController {
       '#markup' => t('Hello, World!'),
     );
   }*/
-  //La siguiente muestra la lista de autores almacenados en el repositorio y los redirecciona para mostrar su información. 
+  //La siguiente muestra la lista de autores almacenados en el repositorio y los redirecciona para mostrar su información.
   function ListAuthor() {
   global $base_url;
   $search_aut = db_select('reposi_author', 'a')->extend('Drupal\Core\Database\Query\PagerSelectExtender');
@@ -219,7 +219,7 @@ class ReposiController {
                   ' ' . $keyw->a_first_name . ' ' . $keyw->a_second_name.' '), $url);
       $author = '<li>'.$internal_link.'</li>';
  /*$author = '<li>'. l($keyw->a_first_lastname . ' ' . $keyw->a_second_lastname .
-                  ' ' . $keyw->a_first_name . ' ' . $keyw->a_second_name . ' ', 
+                  ' ' . $keyw->a_first_name . ' ' . $keyw->a_second_name . ' ',
                   $base_url . '/reposi/author/' . $keyw->aid) . '</li>';*/
     } else {
       $url = Url::fromRoute('reposi.author_aid', ['node' => $keyw->aid]);
@@ -228,9 +228,9 @@ class ReposiController {
       $author = $author.'<li>'.$internal_link.'</li>';
       /*$author = $author . '<li>'.
                  l($keyw->a_first_lastname . ' ' . $keyw->a_second_lastname . ' ' .
-                  $keyw->a_first_name . ' ' . $keyw->a_second_name . ' ', 
+                  $keyw->a_first_name . ' ' . $keyw->a_second_name . ' ',
                   $base_url . '/reposi/author/' . $keyw->aid) . '</li>';*/
-    }  
+    }
   }
   if (empty($author)) {
     $display_aut =  'Without authors';
@@ -257,8 +257,8 @@ function reposi_info_author() {
   $search_p_a = db_select('reposi_publication_author', 'pa');
   $search_p_a->fields('pa')
               ->condition('pa.ap_author_id', $id, '=');
-  $p_a = $search_p_a->execute(); 
-  $empty_p_a = $search_p_a->execute()->fetchField(); 
+  $p_a = $search_p_a->execute();
+  $empty_p_a = $search_p_a->execute()->fetchField();
   $flag_title=0;
   if (!empty($empty_p_a)) {
     foreach ($p_a as $publi) {
@@ -273,27 +273,27 @@ function reposi_info_author() {
         $title_ab = $search_publi_abc->execute()->fetchAssoc();
         if ($title_ab['p_type'] == 'Book Chapter') {
           $flag_title++;
-	  $url = Url::fromRoute('reposi.author');
+	  $url = Url::fromRoute('reposi.Reposi_info_publicationCBF',['node'=>$abc_id]);
 	  $link  = \Drupal::l(t($title_ab['p_title']), $url);
-	  $titles_publi = $titles_publi . '<li>'.'<i>'.t('Title: ').'</i>'. 
+	  $titles_publi = $titles_publi . '<li>'.'<i>'.t('Title: ').'</i>'.
                           $link. '</li>';
-          /*$titles_publi = $titles_publi . '<li>'.'<i>'.t('Title: ').'</i>'. 
+          /*$titles_publi = $titles_publi . '<li>'.'<i>'.t('Title: ').'</i>'.
                           l($title_ab['p_title'], $base_url . '/reposi/chap_book/' . $abc_id . '/free') . '</li>';*/
         } elseif ($title_ab['p_type'] == 'Book') {
           $flag_title++;
-	  $url = Url::fromRoute('reposi.author');
+	  $url = Url::fromRoute('reposi.Reposi_info_publicationBF',['node'=>$abc_id]);
 	  $link  = \Drupal::l(t($title_ab['p_title']), $url);
-	  $titles_publi = $titles_publi . '<li>'.'<i>'.t('Title: ').'</i>'. 
+	  $titles_publi = $titles_publi . '<li>'.'<i>'.t('Title: ').'</i>'.
                           $link . '</li>';
-          /*$titles_publi = $titles_publi . '<li>'.'<i>'.t('Title: ').'</i>'. 
+          /*$titles_publi = $titles_publi . '<li>'.'<i>'.t('Title: ').'</i>'.
                           l($title_ab['p_title'], $base_url . '/reposi/book/' . $abc_id . '/free') . '</li>';*/
         } elseif ($title_ab['p_type'] == 'Article') {
           $flag_title++;
-	  $url = Url::fromRoute('reposi.author');
+	  $url = Url::fromRoute('reposi.Reposi_info_publicationAF',['node'=>$abc_id]);
 	  $link  = \Drupal::l(t($title_ab['p_title']), $url);
-	  $titles_publi = $titles_publi . '<li>'.'<i>'.t('Title: ').'</i>'. 
+	  $titles_publi = $titles_publi . '<li>'.'<i>'.t('Title: ').'</i>'.
                           $link . '</li>';
-          /*$titles_publi = $titles_publi . '<li>'.'<i>'.t('Title: ').'</i>'. 
+          /*$titles_publi = $titles_publi . '<li>'.'<i>'.t('Title: ').'</i>'.
                           l($title_ab['p_title'], $base_url . '/reposi/article/' . $abc_id . '/free') . '</li>';*/
         }
       }
@@ -308,19 +308,19 @@ function reposi_info_author() {
         $title_ts = $search_publi_ts->execute()->fetchAssoc();
         if ($title_ts['p_type'] == 'Thesis') {
           $flag_title++;
-          $url = Url::fromRoute('reposi.author');
+          $url = Url::fromRoute('reposi.Reposi_info_publicationTF',['node'=>$ts_id]);
 	  $link  = \Drupal::l(t($title_ts['p_title']), $url);
-	  $titles_publi = $titles_publi . '<li>'.'<i>'.t('Title: ').'</i>'. 
+	  $titles_publi = $titles_publi . '<li>'.'<i>'.t('Title: ').'</i>'.
                           $link . '</li>';
-          /*$titles_publi = $titles_publi . '<li>'.'<i>'.t('Title: ').'</i>'. 
+          /*$titles_publi = $titles_publi . '<li>'.'<i>'.t('Title: ').'</i>'.
                           l($title_ts['p_title'], $base_url . '/reposi/thesis/' . $ts_id . '/free') . '</li>';*/
         } elseif ($title_ts['p_type'] == 'Software') {
           $flag_title++;
-	  $url = Url::fromRoute('reposi.author');
+	  $url = Url::fromRoute('reposi.Reposi_info_publicationSF',['node'=>$ts_id]);
 	  $link  = \Drupal::l(t($title_ts['p_title']), $url);
-	  $titles_publi = $titles_publi . '<li>'.'<i>'.t('Title: ').'</i>'. 
+	  $titles_publi = $titles_publi . '<li>'.'<i>'.t('Title: ').'</i>'.
                           $link . '</li>';
-          /*$titles_publi = $titles_publi . '<li>'.'<i>'.t('Title: ').'</i>'. 
+          /*$titles_publi = $titles_publi . '<li>'.'<i>'.t('Title: ').'</i>'.
                           l($title_ts['p_title'], $base_url . '/reposi/software/' . $ts_id . '/free') . '</li>';*/
         }
       }
@@ -335,19 +335,19 @@ function reposi_info_author() {
         $title_cp = $search_publi_cp->execute()->fetchAssoc();
         if ($title_cp['p_type'] == 'Conference') {
           $flag_title++;
-	  $url = Url::fromRoute('reposi.author');
+	  $url = Url::fromRoute('reposi.Reposi_info_publicationCF',['node'=>$cp_id]);
 	  $link  = \Drupal::l(t($title_cp['p_title']), $url);
-	  $titles_publi = $titles_publi . '<li>'.'<i>'.t('Title: ').'</i>'. 
+	  $titles_publi = $titles_publi . '<li>'.'<i>'.t('Title: ').'</i>'.
                           $link . '</li>';
-          /*$titles_publi = $titles_publi . '<li>'.'<i>'.t('Title: ').'</i>'. 
+          /*$titles_publi = $titles_publi . '<li>'.'<i>'.t('Title: ').'</i>'.
                           l($title_cp['p_title'], $base_url . '/reposi/conference/' . $cp_id . '/free') . '</li>';*/
         } elseif ($title_cp['p_type'] == 'Patent') {
           $flag_title++;
-	  $url = Url::fromRoute('reposi.author');
+	  $url = Url::fromRoute('reposi.Reposi_info_publicationPF',['node'=>$cp_id]);
 	  $link  = \Drupal::l(t($title_cp['p_title']), $url);
-	  $titles_publi = $titles_publi . '<li>'.'<i>'.t('Title: ').'</i>'. 
+	  $titles_publi = $titles_publi . '<li>'.'<i>'.t('Title: ').'</i>'.
                           $link . '</li>';
-          /*$titles_publi = $titles_publi . '<li>'.'<i>'.t('Title: ').'</i>'. 
+          /*$titles_publi = $titles_publi . '<li>'.'<i>'.t('Title: ').'</i>'.
                           l($title_cp['p_title'], $base_url . '/reposi/patent/' . $cp_id . '/free') . '</li>';*/
         }
       }
@@ -355,19 +355,19 @@ function reposi_info_author() {
   } else {
     $titles_publi = '<p>' . 'Without associated publications.' . '</p>';
   }
-	
+
   $form['uid'] = array(
   	'#type' => 'value',
 		'#value' => $id,
 	);
-  $markup = '<p>' . '<b>' . '<big>' . $info_user['a_first_name'] . ' ' . 
+  $markup = '<p>' . '<b>' . '<big>' . $info_user['a_first_name'] . ' ' .
             $info_user['a_first_lastname'] .'</big>' . '</b>' . '</p>' . '<ul>' .
   			    '<li>' . '<i>' . t('ID: ').'</i>'. $info_user['aid'] .'</li>' .
-            '<li>' . '<i>' . t('Name(s): ') . '</i>' . $info_user['a_first_name'] . 
+            '<li>' . '<i>' . t('Name(s): ') . '</i>' . $info_user['a_first_name'] .
             ' ' . $info_user['a_second_name'] .'</li>' .
-            '<li>' . '<i>' . t('Last name: ') . '</i>' . $info_user['a_first_lastname'] . 
+            '<li>' . '<i>' . t('Last name: ') . '</i>' . $info_user['a_first_lastname'] .
             ' ' . $info_user['a_second_lastname'] . '</li>' . '</ul>' .
-            '<div>'. t('Associated publication(s): (') . $flag_title . ')' . '</div>' . 
+            '<div>'. t('Associated publication(s): (') . $flag_title . ')' . '</div>' .
             '<ul type = square>' . $titles_publi . '</ul>';
   $form['body'] = array('#markup' => $markup);
   return $form;
@@ -375,7 +375,7 @@ function reposi_info_author() {
 
 
 ///___________________________________________________________________________________________________
-  
+
 function reposi_user_list(){
   $header = array('ID', t('Name'), t('Last name'), t('Email'),
                   t('State'));
@@ -390,10 +390,10 @@ function reposi_user_list(){
     $search_stat = db_select('reposi_state', 's');
     $search_stat->fields('s', array('s_type'))
                      ->condition('s.s_uid', $row->uid, '=');
-    $state = $search_stat->execute()->fetchField(); 
+    $state = $search_stat->execute()->fetchField();
 //  $link  = \Drupal::l(t($title_cp['p_title']), $url);               $url = Url::fromRoute('reposi.author_aid', ['node' => $keyw->aid]);
     $url = Url::fromRoute('reposi.admuser_info', ['node' => $row->uid]);
-    $link  = \Drupal::l(t($row->uid), $url); 
+    $link  = \Drupal::l(t($row->uid), $url);
     $rows[] = array(\Drupal::l(t($row->uid), $url),
                     $row->u_first_name,
                     $row->u_first_lastname  . ' ' . $row->u_second_lastname,
@@ -432,10 +432,10 @@ function reposi_user_list(){
   $search_act_state = db_select('reposi_state', 's');
   $search_act_state->fields('s', array('s_uid'))
                    ->condition('s.s_type', 'Active', '=');
-  $id_act_state = $search_act_state->execute(); 
+  $id_act_state = $search_act_state->execute();
   foreach ($id_act_state as $list_act) {
     $query = db_select('reposi_user', 'p')->extend('Drupal\Core\Database\Query\PagerSelectExtender');
-    $query->fields('p', array('uid', 'u_first_name', 'u_first_lastname', 
+    $query->fields('p', array('uid', 'u_first_name', 'u_first_lastname',
                    'u_second_lastname', 'u_email'))
           ->condition('p.uid', $list_act->s_uid, '=')
           ->orderBy('u_first_name', 'ASC')
@@ -469,13 +469,13 @@ function reposi_user_list(){
   $form['table'] = array ('#type'     => 'table',
                           '#header'   => $header,
                           '#rows'  => $rows,
-                          '#multiple' => TRUE,  
+                          '#multiple' => TRUE,
                           '#empty'    => t('No records.')
                           );
  /* $form['table'] = array ('#type'     => 'tableselect',
                           '#header'   => $header,
                           '#options'  => $rows,
-                          '#multiple' => TRUE,  
+                          '#multiple' => TRUE,
                           '#empty'    => t('No records.')
                           );
   /*$form['pager'] = array(
@@ -489,7 +489,5 @@ function reposi_user_list(){
   return $form;
 }
 
-  // CIERRA LA CLASE  
+  // CIERRA LA CLASE
   }
-
-
