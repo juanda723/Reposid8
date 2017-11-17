@@ -24,6 +24,7 @@ function reposi_install() {
   }
 }
 
+
 function reposi_schema() {
     $schema['reposi_user'] = array(
       'description' => 'Repository user data',
