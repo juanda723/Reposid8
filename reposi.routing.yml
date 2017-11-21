@@ -165,3 +165,11 @@ reposi.Reposi_info_publicationSF:
     _title: 'Software information'
   requirements:
     _permission: 'access content'
+
+reposi.Reposi_book_form:
+  path: /reposi/book
+  defaults:
+    _form: 'Drupal\reposi\Form\reposi_book_form'
+    _title: 'Add book'
+  requirements:
+    _permission: 'administer content'
