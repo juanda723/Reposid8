@@ -36,6 +36,7 @@ public function buildForm(array $form, FormStateInterface $form_state) {
     '#title' => t('Description'),
     '#type' => 'textarea',
   );
+  //isset: Determina si una variable está definida y no es NULL.
   $form_state['storage']['author'] = isset($form_state['storage']['author'])?
                                      $form_state['storage']['author']:1;
   $form['author_wrapper'] = array(
@@ -246,7 +247,7 @@ public function buildForm(array $form, FormStateInterface $form_state) {
   $form['#validate'][] = 'reposi_publiform_authorl_validate';
   $_reposi_start_form=TRUE;
   return $form;
-
+}
 //////////////////////////////////////
 public function reposi_book_title_validate(array &$form, FormStateInterface $form_state){
   $title_validate = $form_state['values']['title'];
@@ -290,9 +291,8 @@ public function reposi_publiform_authorl_validate(array &$form, FormStateInterfa
   }
 }
 
-
-public function reposi_book_form_submit(array &$form, FormStateInterface $form_state){
-    $book_title = $form_state['input']['title'];
+public function submitForm(array &$form, FormStateInterface $form_state){
+  /*  $book_title = $form_state['input']['title'];
     $book_sub = $form_state['input']['sub'];
     $book_des = $form_state['input']['description'];
     $book_year = $form_state['input']['year'];
@@ -410,9 +410,7 @@ public function reposi_book_form_submit(array &$form, FormStateInterface $form_s
       }
     }
     drupal_set_message(t('Book: ') . $book_title . t(' was save.'));
-    variable_del('aut');
+    variable_del('aut');*/
   }
-
-}
 
 }
