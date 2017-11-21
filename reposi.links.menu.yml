@@ -9,14 +9,14 @@ reposi.author:
   menu_name: tools
   parent: reposi
 
-#reposi.listus:
-#  title: 'User list'
-#  route_name: reposi.listus
-#  menu_name: tools
-#  parent: reposi
+reposi.listus:
+  title: 'User list'
+  route_name: reposi.listus
+  menu_name: tools
+  parent: reposi
 
-#reposi.listusactive:
-#  title: 'User active list'
-#  route_name: reposi.listusactive
-#  menu_name: tools
-#  parent: reposi.listus
+reposi.listusactive:
+  title: 'User active list'
+  route_name: reposi.listusactive
+  menu_name: tools
+  parent: reposi.listus

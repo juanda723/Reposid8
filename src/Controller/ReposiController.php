@@ -390,10 +390,10 @@ function reposi_user_list(){
     $search_stat = db_select('reposi_state', 's');
     $search_stat->fields('s', array('s_type'))
                      ->condition('s.s_uid', $row->uid, '=');
-    $state = $search_stat->execute()->fetchField();
+    $state = $search_stat->execute()->fetchField(); 
 //  $link  = \Drupal::l(t($title_cp['p_title']), $url);               $url = Url::fromRoute('reposi.author_aid', ['node' => $keyw->aid]);
     $url = Url::fromRoute('reposi.admuser_info', ['node' => $row->uid]);
-    $link  = \Drupal::l(t($row->uid), $url);
+    $link  = \Drupal::l(t($row->uid), $url); 
     $rows[] = array(\Drupal::l(t($row->uid), $url),
                     $row->u_first_name,
                     $row->u_first_lastname  . ' ' . $row->u_second_lastname,
@@ -426,16 +426,17 @@ function reposi_user_list(){
   return $table;
 }
   //_____________________________________________________________________________________________________________________________________________________________________
+
   function reposi_user_act_list(){
   global $base_url;
   $header = array('ID', t('Name'), t('Last name'), t('Email'));
   $search_act_state = db_select('reposi_state', 's');
   $search_act_state->fields('s', array('s_uid'))
                    ->condition('s.s_type', 'Active', '=');
-  $id_act_state = $search_act_state->execute();
+  $id_act_state = $search_act_state->execute(); 
   foreach ($id_act_state as $list_act) {
     $query = db_select('reposi_user', 'p')->extend('Drupal\Core\Database\Query\PagerSelectExtender');
-    $query->fields('p', array('uid', 'u_first_name', 'u_first_lastname',
+    $query->fields('p', array('uid', 'u_first_name', 'u_first_lastname', 
                    'u_second_lastname', 'u_email'))
           ->condition('p.uid', $list_act->s_uid, '=')
           ->orderBy('u_first_name', 'ASC')
@@ -469,13 +470,13 @@ function reposi_user_list(){
   $form['table'] = array ('#type'     => 'table',
                           '#header'   => $header,
                           '#rows'  => $rows,
-                          '#multiple' => TRUE,
+                          '#multiple' => TRUE,  
                           '#empty'    => t('No records.')
                           );
  /* $form['table'] = array ('#type'     => 'tableselect',
                           '#header'   => $header,
                           '#options'  => $rows,
-                          '#multiple' => TRUE,
+                          '#multiple' => TRUE,  
                           '#empty'    => t('No records.')
                           );
   /*$form['pager'] = array(
