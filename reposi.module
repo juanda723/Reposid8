@@ -1,4 +1,10 @@
 <?php
+
+function reposi_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id)
+{
+}
+
+
 function reposi_has_role() {
   global $user;
   $roles = array('authenticated user','administrator','anonymous user');

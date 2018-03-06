@@ -25,6 +25,14 @@ reposi.author:
 
 ##################3andrea##########################################
 
+reposi.formexample:
+  path: 'reposi/formexample'
+  defaults:
+    _form: '\Drupal\reposi\Form\formexample'
+    _title: 'FORM EXAMPLE'
+  requirements:
+    _permission: 'access content'
+
 
 reposi.add_article:
   path: 'reposi/article'
@@ -62,8 +70,16 @@ reposi.listus:
 reposi.listusactive:
   path: 'reposi/listus/active'
   defaults:
-    _controller: '\Drupal\reposi\Controller\ReposiController::reposi_user_act_list'
+    _form: 'Drupal\reposi\Form\Reposi_user_act_list_form'
     _title: 'User active list'
+  requirements:
+    _permission: 'administer content'
+
+reposi.listusinactive:
+  path: 'reposi/listus/inactive'
+  defaults:
+    _form: 'Drupal\reposi\Form\Reposi_user_inact_list_form'
+    _title: 'User Inactive list'
   requirements:
     _permission: 'administer content'
 
@@ -84,7 +100,7 @@ reposi.userdelete:
     _permission: 'administer content'
 
 reposi.useredit:
-  path: 'reposi/adm_user/edit/{node}'
+  path: 'reposi/adm_user/edit'
   defaults:
     _form: 'Drupal\reposi\Form\Reposi_useredit_form'
     _title: 'User Edit'
@@ -100,7 +116,7 @@ reposi.useredit_admin:
     _permission: 'administer content'
 
 
-####################Juan##########################################
+####################Juan###########################################
 
 reposi.reposi_format_ris:
   path: '/reposi/ris/{node}'
@@ -165,11 +181,3 @@ reposi.Reposi_info_publicationSF:
     _title: 'Software information'
   requirements:
     _permission: 'access content'
-
-reposi.Reposi_book_form:
-  path: /reposi/book
-  defaults:
-    _form: 'Drupal\reposi\Form\reposi_book_form'
-    _title: 'Add book'
-  requirements:
-    _permission: 'administer content'
